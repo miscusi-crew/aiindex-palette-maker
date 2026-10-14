@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Palette Maker</title>
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="base.css">
+<style>
+  main{max-width:56rem}
+  .palette{display:grid;grid-template-columns:repeat(5,1fr);height:min(55vh,22rem);border-radius:.9rem;overflow:hidden;margin:.75rem 0;border:1px solid var(--line)}
+  @media (max-width:36rem){.palette{grid-template-columns:1fr;height:auto}.swatch{min-height:4.5rem;flex-direction:row;justify-content:space-between}}
+  .swatch{display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:.4rem;padding:.75rem;border:0;border-radius:0;font-family:ui-monospace,Menlo,monospace;font-size:1rem}
+  .swatch .hex{font-weight:700;letter-spacing:.03em}
+  .swatch .lock{border:0;background:rgba(255,255,255,.25);color:inherit;border-radius:.4rem;padding:.25rem .5rem;font-size:.85rem}
+  .swatch .lock[aria-pressed="true"]{background:rgba(0,0,0,.35);color:#fff}
+  .saved{display:grid;gap:.5rem;margin-top:1.25rem}
+  .saved h2{font-size:1rem;margin:0}
+  .mini{display:flex;align-items:center;gap:.5rem}
+  .mini .chips{display:flex;flex:1;height:2rem;border-radius:.4rem;overflow:hidden;border:1px solid var(--line);cursor:pointer;padding:0}
+  .mini .chips span{flex:1}
+  .mini .x{border:0;background:transparent;color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+  <h1>Palette Maker</h1>
+  <p class="sub">Generate (or press Space), lock the colours you like, click a colour to copy its hex code.</p>
+  <div class="row">
+    <button id="gen" class="primary">Generate</button>
+    <label for="scheme">Style</label>
+    <select id="scheme">
+      <option value="any">Surprise me</option>
+      <option value="analogous">Analogous</option>
+      <option value="complementary">Complementary</option>
+      <option value="triadic">Triadic</option>
+      <option value="mono">Monochrome</option>
+    </select>
+    <button id="save">Save palette</button>
+  </div>
+  <div class="palette" id="palette"></div>
+  <p class="msg" id="msg" role="status"></p>
+  <section class="saved" aria-labelledby="saved-h">
+    <h2 id="saved-h">Saved palettes</h2>
+    <div id="saved"></div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
